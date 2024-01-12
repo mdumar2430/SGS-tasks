@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "RC+XE9wMlnlcNOEVnPD837CHVqGb2c3xBR1THlc5lVs=",
+  "Source": "demoSqlite",
+  "BasePath": "_content/demoSqlite",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
