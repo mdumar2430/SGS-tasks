@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
+  public isLoggedIn : boolean = false;
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]>{

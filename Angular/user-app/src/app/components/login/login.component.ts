@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
-import { HttpClient, HttpClientModule, HttpParams } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import * as forge from 'node-forge';
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { UserService } from "../../services/user.service";
 import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -18,7 +19,7 @@ export class LoginComponent {
     userEmail: string = "";
     userPass: string = "";
     btnClicked: boolean = false;
-    loginSuccess: boolean = false;
+    
 
     publicKey: string = `-----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAskgPKBcNpz71mi4NSYa5
@@ -29,7 +30,11 @@ export class LoginComponent {
     5wK+w39sjDYfAdnJUkr6PjtSbN4/Sg/NMkKB2Ngn8oj7LCfe/7RNqIdiS+dQuSFg
     eQIDAQAB
     -----END PUBLIC KEY-----`;
-    constructor(private _router: Router, private userService: UserService) { }
+    constructor(private _router: Router, private userService: UserService, private _snackBar: MatSnackBar) { }
+
+    ngOnInit(){
+      this.userService.isLoggedIn = false
+    }
 
     login() {
       var rsa = forge.pki.publicKeyFromPem(this.publicKey);
@@ -40,22 +45,28 @@ export class LoginComponent {
       {
           next: (res)=>{
             if(res){
-              alert("Login SuccessFull!")
+              this.userService.isLoggedIn = true
+              this._snackBar.open('Login Successfull', 'Ok', {
+                duration: 2000
+              });
               this._router.navigate(['/users'])
             }
             else{
-              alert("Invalid Password!")
+              this._snackBar.open('Login Failed - Invalid Email or Password', 'Ok', {
+                duration: 2000
+              });
             }
           },
           error: (err)=>{
-            alert(err.error)
+            this._snackBar.open('Login Failed - Invalid Email or Password', 'Ok', {
+              duration: 2000
+            });
         }
       }
       )
     }
 
     logout() {
-        this.loginSuccess = false;
         this.btnClicked = false;
     }
 }

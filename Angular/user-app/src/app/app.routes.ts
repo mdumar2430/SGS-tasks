@@ -9,6 +9,6 @@ export const routes: Routes = [
     },
     {
         path:'users',
-        component:UserListComponent
+        component:UserListComponent,
     }
 ];
