@@ -17,18 +17,21 @@ namespace demoSqlite.Services
         {
             if (user != null)
             {
-                var addr = new System.Net.Mail.MailAddress(user.Email);
-                if(addr.Address ==  user.Email)
+                if(String.IsNullOrEmpty(user.Name) || String.IsNullOrEmpty(user.Email) || String.IsNullOrEmpty(user.Password))
                 {
-                    _appDbContext.Users.Add(user);
-                    await _appDbContext.SaveChangesAsync();
-                    return user;
+                    throw new Exception("Fields Cannot be Empty");
                 }
                 else
                 {
-                    return null;
+                    var addr = new System.Net.Mail.MailAddress(user.Email);
+                    if (addr.Address == user.Email)
+                    {
+                        _appDbContext.Users.Add(user);
+                        await _appDbContext.SaveChangesAsync();
+                        return user;
+                    }
                 }
-                
+                              
             }
             throw new Exception("Error in Adding User");
         }

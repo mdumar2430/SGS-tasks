@@ -53,6 +53,24 @@ namespace UserAppApiTest
         }
 
         [Fact]
+        public async Task AddUser_Failure_EmptyFields()
+        {
+            //Arrange
+            var testUser = new User() { Id = 1, Email = "test@gamil.com", Name = "", Password = "test" };
+            _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Fields cannot be empty."));
+            var controller = new UserController(_userServiceMock.Object);
+
+            //Act
+            var result = await controller.AddUser(testUser);
+            var message = result.Result as BadRequestObjectResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("Fields cannot be empty.", message.Value);
+        }
+
+        [Fact]
         public async Task AddUser_Failure_NullUser()
         {
             //Arrange
@@ -87,7 +105,7 @@ namespace UserAppApiTest
         }
 
         [Fact]
-        public async Task DeleteUserById_BadRequest()
+        public async Task DeleteUserById_BadRequest_NotAnActiveUser()
         {
             //Arrange
             var testUserId = 2;
@@ -105,11 +123,11 @@ namespace UserAppApiTest
         }
 
         [Fact]
-        public async Task DeleteUserById_BadRequest_ThrowsException()
+        public async Task DeleteUserById_BadRequest_ThrowsException_InvalidUserID()
         {
             //Arrange
             var testUserId = 112;
-            _userServiceMock.Setup(x => x.DeleteUserById(testUserId)).ThrowsAsync(new Exception("Error"));
+            _userServiceMock.Setup(x => x.DeleteUserById(testUserId)).ThrowsAsync(new Exception("Error: Invalid UserId"));
             var controller = new UserController(_userServiceMock.Object);
 
             //Act
@@ -119,7 +137,7 @@ namespace UserAppApiTest
             //Assert
             Assert.NotNull(badReqResult);
             Assert.IsType<BadRequestObjectResult>(badReqResult);
-            Assert.Equal("Error", message.Value);
+            Assert.Equal("Error: Invalid UserId", message.Value);
         }
     }
 }
