@@ -20,7 +20,7 @@ namespace UserAppApiTest
         public async Task AddUser_Success()
         {
             //Arrange
-            var testUser = new User() { Id = 1, Email = "test", IsActive = true, Name = "test1", Password = "test"};
+            var testUser = new User() { Id = 1, Email = "test@gmail.com", Name = "test1", Password = "test"};
             _userServiceMock.Setup(x => x.AddUser(testUser)).ReturnsAsync(testUser);    
             var controller = new UserController(_userServiceMock.Object);
 
@@ -35,7 +35,25 @@ namespace UserAppApiTest
         }
 
         [Fact]
-        public async Task AddUser_Failure()
+        public async Task AddUser_Failure_InvalidEmail()
+        {
+            //Arrange
+            var testUser = new User() { Id = 1, Email = "test", Name = "test1", Password = "test" };
+            _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Invalid Email format"));
+            var controller = new UserController(_userServiceMock.Object);
+
+            //Act
+            var result = await controller.AddUser(testUser);
+            var message = result.Result as BadRequestObjectResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("Invalid Email format", message.Value);
+        }
+
+        [Fact]
+        public async Task AddUser_Failure_NullUser()
         {
             //Arrange
             var testUser = (User)null;

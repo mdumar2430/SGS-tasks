@@ -17,9 +17,18 @@ namespace demoSqlite.Services
         {
             if (user != null)
             {
-                _appDbContext.Users.Add(user);
-                await _appDbContext.SaveChangesAsync();
-                return user;
+                var addr = new System.Net.Mail.MailAddress(user.Email);
+                if(addr.Address ==  user.Email)
+                {
+                    _appDbContext.Users.Add(user);
+                    await _appDbContext.SaveChangesAsync();
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+                
             }
             throw new Exception("Error in Adding User");
         }
