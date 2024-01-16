@@ -12,7 +12,7 @@ namespace demoSqlite.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(AppDbContext appDbContext, IUserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;   
         }
@@ -43,7 +43,7 @@ namespace demoSqlite.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ActionResult<User>> DeleteUserbyId(int id)
+        public async Task<ActionResult> DeleteUserbyId(int id)
         {
             try
             {

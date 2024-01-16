@@ -12,11 +12,9 @@ namespace demoSqlite.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _loginService;
-        private readonly IAppDbContext _appDbContext;
-        public LoginController(ILoginService _loginService, IAppDbContext appDbContext)
+        public LoginController(ILoginService _loginService)
         {
             this._loginService = _loginService;
-            this._appDbContext = appDbContext;
         }
 
         [HttpPost]

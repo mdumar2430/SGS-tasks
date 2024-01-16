@@ -4769,19 +4769,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sgsuser\\.nuget\\packages\\": {}
+    "C:\\Users\\Mohamad Umar M\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sgsuser\\source\\repos\\demoSqlite\\demoSqlite.csproj",
+      "projectUniqueName": "D:\\Work\\SGS\\SGS-tasks\\WebAPI\\demoSqlite\\demoSqlite.csproj",
       "projectName": "demoSqlite",
-      "projectPath": "C:\\Users\\sgsuser\\source\\repos\\demoSqlite\\demoSqlite.csproj",
-      "packagesPath": "C:\\Users\\sgsuser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sgsuser\\source\\repos\\demoSqlite\\obj\\",
+      "projectPath": "D:\\Work\\SGS\\SGS-tasks\\WebAPI\\demoSqlite\\demoSqlite.csproj",
+      "packagesPath": "C:\\Users\\Mohamad Umar M\\.nuget\\packages\\",
+      "outputPath": "D:\\Work\\SGS\\SGS-tasks\\WebAPI\\demoSqlite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sgsuser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mohamad Umar M\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
