@@ -21,16 +21,15 @@ namespace UserAppApiTest
         [Fact]
         public void validateUser_OK()
         {
-            //Arrange
             LoginUser validUser = new LoginUser()
             {
                 Email = "testing@gmail.com",
-                Password = "password"
+                Password = "correct_password"
             };
             LoginUser inValidUser = new LoginUser()
             {
                 Email = "testing0@gmail.com",
-                Password = "password"
+                Password = "incorrect_password"
             };
 
             _loginServiceMock.Setup(x => x.validateUser(validUser.Email, validUser.Password)).Returns(true);
@@ -54,14 +53,14 @@ namespace UserAppApiTest
         }
 
         [Fact]
-        public void validateUser_Exception_BadRequest()
+        public void validateUser_Exception_BadRequest_InvalidEmailFormat()
         {
             LoginUser inValidUser = new LoginUser()
             {
-                Email = "testing0@gmail.com",
+                Email = "testing",
                 Password = "password"
             };
-            _loginServiceMock.Setup(x => x.validateUser(inValidUser.Email, inValidUser.Password)).Throws(new Exception("Error"));
+            _loginServiceMock.Setup(x => x.validateUser(inValidUser.Email, inValidUser.Password)).Throws(new Exception("Error: Invalid Email Format"));
             var controller = new LoginController( _loginServiceMock.Object);
 
             var badReqResult = controller.validateUser(inValidUser);
@@ -69,7 +68,26 @@ namespace UserAppApiTest
 
             Assert.NotNull(badReqResult);
             Assert.IsType<BadRequestObjectResult>(badReqResult);
-            Assert.Equal("Error", data.Value);
+            Assert.Equal("Error: Invalid Email Format", data.Value);
+        }
+
+        [Fact]
+        public void validateUser_Exception_BadRequest_EmptyFields()
+        {
+            LoginUser inValidUser = new LoginUser()
+            {
+                Email = "",
+                Password = "password"
+            };
+            _loginServiceMock.Setup(x => x.validateUser(inValidUser.Email, inValidUser.Password)).Throws(new Exception("Error: Fields cannot be empty."));
+            var controller = new LoginController(_loginServiceMock.Object);
+
+            var badReqResult = controller.validateUser(inValidUser);
+            var data = badReqResult as BadRequestObjectResult;
+
+            Assert.NotNull(badReqResult);
+            Assert.IsType<BadRequestObjectResult>(badReqResult);
+            Assert.Equal("Error: Fields cannot be empty.", data.Value);
         }
     }
 }
