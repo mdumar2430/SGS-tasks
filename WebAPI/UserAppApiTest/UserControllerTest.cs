@@ -89,7 +89,7 @@ namespace UserAppApiTest
             //Test Case 3: Empty Password Field
             //Arrange
             testUser.Email = "tester@gmail.com";
-            testUser.Name = "";
+            testUser.Password = "";
             _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Fields cannot be empty."));
             controller = new UserController(_userServiceMock.Object);
 
