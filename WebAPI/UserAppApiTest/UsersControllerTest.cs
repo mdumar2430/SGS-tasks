@@ -50,7 +50,7 @@ namespace UserAppApiTest
         {
             //Arrange
             List<User> testUsers = new List<User>();
-            _usersService.Setup(x => x.GetActiveUsers()).Throws(new Exception("Empty List"));
+            _usersService.Setup(x => x.GetActiveUsers()).Throws(new Exception("No Users Found"));
             var controller = new UsersController(_usersService.Object);
 
             //Act
@@ -60,7 +60,7 @@ namespace UserAppApiTest
             //Assert
             Assert.NotNull(badReqResult);
             Assert.IsType<BadRequestObjectResult>(badReqResult.Result);
-            Assert.Equal("Empty List", data.Value);
+            Assert.Equal("No Users Found", data.Value);
         }
 
         [Fact]

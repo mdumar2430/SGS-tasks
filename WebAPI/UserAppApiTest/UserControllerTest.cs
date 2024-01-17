@@ -55,6 +55,7 @@ namespace UserAppApiTest
         [Fact]
         public async Task AddUser_Failure_EmptyFields()
         {
+            //Test Case 1: Empty Name Field
             //Arrange
             var testUser = new User() { Id = 1, Email = "test@gamil.com", Name = "", Password = "test" };
             _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Fields cannot be empty."));
@@ -63,6 +64,38 @@ namespace UserAppApiTest
             //Act
             var result = await controller.AddUser(testUser);
             var message = result.Result as BadRequestObjectResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("Fields cannot be empty.", message.Value);
+
+            //Test Case 2: Empty Email Field
+            //Arrange
+            testUser.Email = "";
+            testUser.Name = "tester";
+            _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Fields cannot be empty."));
+            controller = new UserController(_userServiceMock.Object);
+
+            //Act
+            result = await controller.AddUser(testUser);
+            message = result.Result as BadRequestObjectResult;
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("Fields cannot be empty.", message.Value);
+
+            //Test Case 3: Empty Password Field
+            //Arrange
+            testUser.Email = "tester@gmail.com";
+            testUser.Name = "";
+            _userServiceMock.Setup(x => x.AddUser(testUser)).ThrowsAsync(new Exception("Fields cannot be empty."));
+            controller = new UserController(_userServiceMock.Object);
+
+            //Act
+            result = await controller.AddUser(testUser);
+            message = result.Result as BadRequestObjectResult;
 
             //Assert
             Assert.NotNull(result);
