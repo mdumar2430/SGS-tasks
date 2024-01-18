@@ -1,15 +1,15 @@
-<nav class="navbar fixed-top navbar-light bg-dark">
+<nav class="navbar sticky-top  navbar-light bg-dark">
     <div class="container d-flex justify-content-center">
       <a class="navbar-brand" href="#">
         <img class="img-fluid" src="../../../assets/sgs-logo.png" width="80">
       </a>
     </div>
-    <div *ngIf="userService.isLoggedIn" class="m-2" style="color: aliceblue;">
-        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-            <mat-icon>person</mat-icon>
-            <!-- <mat-select>
-                <mat-option class="position-absolute ">Log Out</mat-option>
-            </mat-select> -->
+    <div *ngIf="userService.isLoggedIn" style="color: aliceblue;">
+        <button mat-icon-button color="" [matMenuTriggerFor]="beforeMenu">
+          <mat-icon>person</mat-icon>
         </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item [routerLink]="['']" >Logout</button>
+        </mat-menu>
     </div>
 </nav>

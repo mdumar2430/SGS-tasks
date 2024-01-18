@@ -323,3 +323,12 @@ D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\obj\Debug\net8.0\refint\demoSqlite.dll
 D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\obj\Debug\net8.0\demoSqlite.pdb
 D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\obj\Debug\net8.0\demoSqlite.genruntimeconfig.cache
 D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\obj\Debug\net8.0\ref\demoSqlite.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.AspNetCore.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+D:\Work\SGS\SGS-tasks\WebAPI\demoSqlite\bin\Debug\net8.0\Serilog.Sinks.File.dll

@@ -1,0 +1,5 @@
+.side-menu-item:hover{
+    background-color: #00a2e6;
+    border-radius: 5px;
+    transition: 0.5s;
+}

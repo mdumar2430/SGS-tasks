@@ -12,16 +12,20 @@ namespace demoSqlite.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _loginService;
-        public LoginController(ILoginService _loginService)
+        private readonly ILogger<LoginController> _logger; 
+        public LoginController(ILoginService _loginService, ILogger<LoginController> logger)
         {
             this._loginService = _loginService;
+            _logger = logger;
         }
 
         [HttpPost]
         public ActionResult validateUser(LoginUser user)
         {
+            
             try
             {
+                _logger.LogInformation("Working");
                 bool isValidUser = this._loginService.validateUser(user.Email, user.Password);
                 if (isValidUser)
                 {

@@ -2,6 +2,7 @@ using demoSqlite.Controllers.Data;
 using demoSqlite.RSA;
 using demoSqlite.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,10 @@ builder.Services.AddDbContext<AppDbContext>(Options =>
     Options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Host.UseSerilog(
+    (context, configuration) => configuration.ReadFrom.Configuration(context.Configuration)
+    );
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +37,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+app.UseSerilogRequestLogging();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
